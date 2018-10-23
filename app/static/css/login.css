@@ -376,11 +376,8 @@ label {
   border-radius: 25px;
   border: none;
 
-  background: #9152f8;
-  background: -webkit-linear-gradient(bottom, #003366, #129793);
-  background: -o-linear-gradient(bottom, #003366, #129793);
-  background: -moz-linear-gradient(bottom, #003366, #129793);
-  background: linear-gradient(bottom, #003366, #129793);
+  background: #fff;
+
   position: relative;
   z-index: 1;
 
@@ -408,16 +405,6 @@ label {
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
   transition: all 0.4s;
-}
-
-.login-btn:hover,
-.signup-btn:hover {
-  color: #fff;
-}
-
-.login-btn:hover::before,
-.signup-btn:hover::before {
-  opacity: 0;
 }
 
 @media (max-width: 576px) {
