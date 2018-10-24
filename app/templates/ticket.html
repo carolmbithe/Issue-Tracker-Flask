@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block styles %}
+  {{super()}}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+  <link rel="stylesheet" href="{{url_for('static',filename='css/user-styles.css')}}">
+{% endblock %}
+
+{% block navbar %}
+    {% include 'navbar1.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="container flex">
+      <div class="tickets">
+        <div class="row">
+          <div class="col-md-8" class="text-center">
+            <h3 class="text-center">{{ticket.id}}:{{ticket.ticket_title}}</h3>
+            <p class="text-center">{{ticket.ticket_description}}</p>
+            <p class="text-center"><i class="fas fa-exclamation-circle"></i>
+            <span>{{ticket.severity}}</span> <i class="fas fa-user"></i>
+            {% if ticket.ticket.id == current_user.id %}
+              <span class="technician">{{ticket.assigned_to}}</span>
+            {% else %}
+            <span class="technician">{{ticket.ticket.username}}</span>
+            {% endif %}
+          </p>
+          <p class="text-center">Status: <span class="text-muted">{{ticket.status}}</span></p>
+          {% if current_user.username == ticket.assigned_to %}
+          <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-4">
+              {% if ticket.status == 'open' %}
+              <h4>Change Status:</h4>
+              <a href="{{url_for('main.update_progress', id=ticket.id)}}" class="btn btn-warning btn-md">In Progress</a>
+              <a href="{{url_for('main.update_closed',id=ticket.id)}}" class="btn btn-md btn-success">Close</a>
+              {% elif ticket.status == 'progress' %}
+              <h4>Change Status:</h4>
+              <a href="{{url_for('main.update_closed',id=ticket.id)}}" class="btn btn-md btn-success">Close</a>
+              {% endif %}
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+          {% endif %}
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

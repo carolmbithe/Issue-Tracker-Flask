@@ -1,0 +1,25 @@
+<div class="header fixed-top">
+  <nav class="navbar navbar-expand-md">
+    <span>
+      <i class="fab fa-phoenix-framework fa-2x home-icon text-dark"></i>
+    </span>
+    <div class="navbar-brand">Phoenix Issue Tracker - Dashboard</div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbar1" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar1">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a href="/technician" class="nav-link">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{url_for('main.tickets')}}" class="nav-link">Tickets</a>
+        </li>
+        <li class="nav-item">
+            <a href="{{url_for('auth.logout')}}" class="nav-link">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>

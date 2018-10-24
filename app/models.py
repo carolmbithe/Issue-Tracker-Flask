@@ -35,7 +35,7 @@ class User(UserMixin,db.Model):
         return check_password_hash(self.pass_secure,password)
 
     def __repr__(self):
-        return f'User {self.username}'
+        return f'{self.username}'
 
 class Role(db.Model):
     __tablename__ = 'roles'
@@ -45,7 +45,7 @@ class Role(db.Model):
     users = db.relationship('User',backref = 'role',lazy="dynamic")
 
     def __repr__(self):
-        return f'User {self.name}'
+        return f'{self.name}'
 
 class Ticket(db.Model):
     __tablename__ = 'tickets'
@@ -53,4 +53,7 @@ class Ticket(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     ticket_title = db.Column(db.String(255))
     ticket_description = db.Column(db.String(255))
+    severity = db.Column(db.String(100))
+    status = db.Column(db.String(100), default='open')
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    assigned_to = db.Column(db.String(255))

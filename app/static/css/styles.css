@@ -101,32 +101,32 @@ option.select {
   border: none;
 }
 
-.login-input:focus::-webkit-input-placeholder {
+input:focus::-webkit-input-placeholder {
   color: transparent;
 }
-.login-input:focus:-moz-placeholder {
+input:focus:-moz-placeholder {
   color: transparent;
 }
-.login-input:focus::-moz-placeholder {
+input:focus::-moz-placeholder {
   color: transparent;
 }
-.login-input:focus:-ms-input-placeholder {
+input:focus:-ms-input-placeholder {
   color: transparent;
 }
-.login-input:focus {
+input:focus {
   border-color: transparent;
 }
 
-.login-input::-webkit-input-placeholder {
+input::-webkit-input-placeholder {
   color: #fff;
 }
-.login-input:-moz-placeholder {
+input:-moz-placeholder {
   color: #fff;
 }
-.login-input::-moz-placeholder {
+input::-moz-placeholder {
   color: #fff;
 }
-.login-input:-ms-input-placeholder {
+input:-ms-input-placeholder {
   color: #fff;
 }
 
