@@ -15,7 +15,7 @@ def index():
     View root page function that returns the index page and its data
     '''
 
-    title = 'Home - Welcome to Perfect Pitch'
+    title = 'Home - Phoenix issue tracker'
     if current_user.role_id == 1:
         return redirect(url_for('.admin'))
     elif current_user.role_id == 2:
