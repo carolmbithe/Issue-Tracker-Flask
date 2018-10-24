@@ -35,6 +35,7 @@ def admin():
     return render_template('admin.html', open_tickets_list = open_tickets_list,progress_tickets_list = progress_tickets_list, closed_tickets_list = closed_tickets_list)
 
 @main.route('/technician', methods=['GET','POST'])
+@login_required
 def technician():
     form = TicketForm()
     if form.validate_on_submit():
@@ -45,6 +46,7 @@ def technician():
     return render_template('technician.html', form = form)
 
 @main.route('/requester', methods=['GET','POST'])
+@login_required
 def requester():
     form = TicketForm()
     if form.validate_on_submit():
@@ -60,7 +62,13 @@ def users():
     users = User.query.all()
     return render_template('users.html',users = users)
 
+@main.route('/tickets')
+def tickets():
+    tickets = Ticket.query.all()
+    return render_template('tickets.html', tickets = tickets)
+
 @main.route('/user/<int:id>/update', methods = ['GET','POST'])
+@login_required
 def update_user(id):
     form = UpdateUserForm()
     user = User.query.filter_by(id=id).first()
