@@ -45,11 +45,12 @@ def technician():
     return render_template('technician.html', form = form)
 
 @main.route('/requester', methods=['GET','POST'])
+@login_required
 def requester():
     form = TicketForm()
     if form.validate_on_submit():
         print(form.technician.data, form.subject.data, form.severity.data)
-        new_ticket = Ticket(ticket_title = form.subject.data,ticket_description = form.description.data, severity = form.severity.data, user_id = current_user, assigned_to = form.technician.data)
+        new_ticket = Ticket(ticket_title = form.subject.data,ticket_description = form.description.data, severity = form.severity.data, ticket = current_user, assigned_to = str(form.technician.data))
         db.session.add(new_ticket)
         db.session.commit()
         return redirect(url_for('.requester'))
@@ -57,7 +58,7 @@ def requester():
 
 @main.route('/users')
 def users():
-    users = User.query.all()
+    users = User.query.order_by(User.id.asc()).all()
     return render_template('users.html',users = users)
 
 @main.route('/user/<int:id>/update', methods = ['GET','POST'])
