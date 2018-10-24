@@ -2,18 +2,6 @@
 {% import 'macros.html' as macro %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
-{block scripts}
-    {{super()}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $("button#addUser").click(function(){
-                alert('test');
-            });
-        });
-    </script>
-{endblock}
-
 <!-- Styles block -->
 {% block styles %}
     {{super()}}
@@ -30,7 +18,7 @@
 <div class="container flex">
   <div class="dashboard">
     <button type="button" name="button" class="btn btn-primary" id="addUser">Add User</button>
-    <div class="newUser" style="display:none;">
+    <div class="newUser" style="display:none; margin-top:10px;">
         {{wtf.quick_form(form)}}
     </div>
     <table class="table table-striped">

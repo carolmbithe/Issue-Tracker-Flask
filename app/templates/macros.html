@@ -21,3 +21,13 @@
       </tr>
     {% endfor %}
 {% endmacro %}
+
+{% macro displayTicketsRequester(tickets_list)%}
+    {% for ticket in tickets_list %}
+    <tr>
+        <th>{{ticket.id}}</th>
+        <td>{{ticket.ticket_title}}</td>
+        <td>{{ticket.assigned_to}}</td>
+      </tr>
+    {% endfor %}
+{% endmacro %}

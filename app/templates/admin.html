@@ -101,5 +101,44 @@
       </div>
     </div>
   </div>
+  <canvas id="ticketSummaryChart" width="50" height="10"></canvas>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+  <script>
+    var ctx = document.getElementById('ticketSummaryChart').getContext('2d');
+    var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: [{% for item in labels %}
+                  "{{item}}",
+              {% endfor %}],
+        datasets: [{
+            backgroundColor: ['#FF0000','#FFA500','#00B200'],
+            data: {{values}},
+
+        }]
+    },
+
+    // Configuration options go here
+    options: {
+    scales: {
+        yAxes: [{
+            categoryPercentage: 1.0,
+            barPercentage: 1.0,
+            ticks: {
+                beginAtZero: true
+                }
+            }]
+        },
+    legend: {display: false},
+    title: {
+        display: true,
+        text: 'Ticket Status Summary'
+      }
+    }
+    });
+ </script>
 </div>
 {%endblock%}
