@@ -54,6 +54,6 @@ class Ticket(db.Model):
     ticket_title = db.Column(db.String(255))
     ticket_description = db.Column(db.String(255))
     severity = db.Column(db.String(100))
-    status = db.Column(db.String(100))
+    status = db.Column(db.String(100), default = 'open')
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
     assigned_to = db.Column(db.String(255))
