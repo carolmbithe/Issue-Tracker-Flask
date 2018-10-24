@@ -29,7 +29,7 @@ def index():
 @login_required
 def admin():
     open_tickets_list = Ticket.query.filter_by(status = 'open').order_by(Ticket.id.desc()).limit(10)
-    progress_tickets_list = Ticket.query.filter_by(status = 'progress').order_by(Ticket.id.desc()).limit(10)
+    progress_tickets_list = Ticket.query.filter_by(status = 'inprogress').order_by(Ticket.id.desc()).limit(10)
     closed_tickets_list = Ticket.query.filter_by(status = 'closed').order_by(Ticket.id.desc()).limit(10)
 
     labels = ["Open","In progress","Closed"]
