@@ -2,7 +2,7 @@ from flask import render_template,request,redirect,url_for,abort
 from . import main
 from ..models import User,Ticket,Role
 from .. import db,photos
-from .forms import TicketForm, UpdateUserForm
+from .forms import TicketForm, UpdateUserForm, CreateUserForm
 from flask_login import login_required,current_user
 import datetime
 
@@ -57,10 +57,26 @@ def requester():
         return redirect(url_for('.requester'))
     return render_template('requester.html', form= form)
 
-@main.route('/users')
+@main.route('/users', methods = ['GET','POST'])
 def users():
+    form = CreateUserForm()
+
+    if form.validate_on_submit():
+        role = 0
+        if str(form.role.data) == 'admin':
+            role = 1
+        elif str(form.role.data) == 'technician':
+            role = 2
+        elif str(form.role.data) == 'requester':
+            role = 3
+        user = User(email = form.email.data, username = form.username.data,firstname= form.firstname.data,lastname= form.lastname.data,password = form.password.data,role_id = role)
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('.users'))
+
     users = User.query.order_by(User.id.asc()).all()
-    return render_template('users.html',users = users)
+    return render_template('users.html',users = users, form = form)
 
 @main.route('/tickets')
 def tickets():

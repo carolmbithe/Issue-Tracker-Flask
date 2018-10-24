@@ -1,5 +1,18 @@
 {% extends 'base.html' %}
 {% import 'macros.html' as macro %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{block scripts}
+    {{super()}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("button#addUser").click(function(){
+                alert('test');
+            });
+        });
+    </script>
+{endblock}
 
 <!-- Styles block -->
 {% block styles %}
@@ -16,19 +29,43 @@
 {% block content %}
 <div class="container flex">
   <div class="dashboard">
+    <button type="button" name="button" class="btn btn-primary" id="addUser">Add User</button>
+    <div class="newUser" style="display:none;">
+        {{wtf.quick_form(form)}}
+    </div>
     <table class="table table-striped">
       <thead>
         <tr>
           <th>ID</th>
           <th>Username</th>
+          <th>First name</th>
+          <th>Last name</th>
           <th>Role</th>
         </tr>
       </thead>
       <tbody>
-        {{macro.displayUsers(users)}}
+          {% for user in users%}
+          <tr>
+              <td><a href="{{url_for('main.update_user', id=user.id)}}">{{user.id}}</a></td>
+              <td>{{user.username}}</td>
+              <td>{{user.firstname}}</td>
+              <td>{{user.lastname}}</td>
+              <td>{{user.role}}</td>
+          </tr>
+          {% endfor %}
       </tbody>
     </table>
+        </div>
+      </div>
+    </div>
   </div>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript">
+      $(document).ready(function(){
+          $("#addUser").click(function(){
+              $(".newUser").toggle();
+          });
+      });
+  </script>
 </div>
 {% endblock %}
